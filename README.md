@@ -52,7 +52,7 @@ Changes (breaking or otherwise) in v1.0.0 can be found [here](https://github.com
 
 ## Installation
 
-    npm install ssh2
+    npm install aviinl-ssh2
 
 ## Client Examples
 
@@ -61,7 +61,7 @@ Changes (breaking or otherwise) in v1.0.0 can be found [here](https://github.com
 ```js
 const { readFileSync } = require('fs');
 
-const { Client } = require('ssh2');
+const { Client } = require('aviinl-ssh2');
 
 const conn = new Client();
 conn.on('ready', () => {
@@ -97,7 +97,7 @@ conn.on('ready', () => {
 ```js
 const { readFileSync } = require('fs');
 
-const { Client } = require('ssh2');
+const { Client } = require('aviinl-ssh2');
 
 const conn = new Client();
 conn.on('ready', () => {
@@ -144,7 +144,7 @@ conn.on('ready', () => {
 ### Send a raw HTTP request to port 80 on the server
 
 ```js
-const { Client } = require('ssh2');
+const { Client } = require('aviinl-ssh2');
 
 const conn = new Client();
 conn.on('ready', () => {
@@ -192,7 +192,7 @@ conn.on('ready', () => {
 ### Forward local connections to port 8000 on the server to us
 
 ```js
-const { Client } = require('ssh2');
+const { Client } = require('aviinl-ssh2');
 
 const conn = new Client();
 conn.on('ready', () => {
@@ -244,7 +244,7 @@ conn.on('ready', () => {
 ### Get a directory listing via SFTP
 
 ```js
-const { Client } = require('ssh2');
+const { Client } = require('aviinl-ssh2');
 
 const conn = new Client();
 conn.on('ready', () => {
@@ -289,7 +289,7 @@ conn.on('ready', () => {
 ### Connection hopping
 
 ```js
-const { Client } = require('ssh2');
+const { Client } = require('aviinl-ssh2');
 
 const conn1 = new Client();
 const conn2 = new Client();
@@ -340,7 +340,7 @@ conn2.on('ready', () => {
 ```js
 const { Socket } = require('net');
 
-const { Client } = require('ssh2');
+const { Client } = require('aviinl-ssh2');
 
 const conn = new Client();
 
@@ -377,7 +377,7 @@ conn.on('ready', () => {
 
 ```js
 const socks = require('socksv5');
-const { Client } = require('ssh2');
+const { Client } = require('aviinl-ssh2');
 
 const sshConfig = {
   host: '192.168.100.1',
@@ -427,7 +427,7 @@ socks.createServer((info, accept, deny) => {
 ```js
 const http = require('http');
 
-const { Client, HTTPAgent, HTTPSAgent } = require('ssh2');
+const { Client, HTTPAgent, HTTPSAgent } = require('aviinl-ssh2');
 
 const sshConfig = {
   host: '192.168.100.1',
@@ -453,7 +453,7 @@ http.get({
 ### Invoke an arbitrary subsystem
 
 ```js
-const { Client } = require('ssh2');
+const { Client } = require('aviinl-ssh2');
 
 const xmlhello = `
   <?xml version="1.0" encoding="UTF-8"?>
@@ -490,7 +490,7 @@ const { timingSafeEqual } = require('crypto');
 const { readFileSync } = require('fs');
 const { inspect } = require('util');
 
-const { utils: { parseKey }, Server } = require('ssh2');
+const { utils: { parseKey }, Server } = require('aviinl-ssh2');
 
 const allowedUser = Buffer.from('foo');
 const allowedPassword = Buffer.from('bar');
@@ -572,7 +572,7 @@ const {
     OPEN_MODE,
     STATUS_CODE,
   },
-} = require('ssh2');
+} = require('aviinl-ssh2');
 
 const allowedUser = Buffer.from('foo');
 const allowedPassword = Buffer.from('bar');
