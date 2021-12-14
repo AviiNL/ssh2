@@ -1222,9 +1222,7 @@ const setup = setupSimple.bind(undefined, debug);
       'aes128-ctr',
       'aes192-ctr',
       'aes256-ctr',
-      'aes128-gcm',
       'aes128-gcm@openssh.com',
-      'aes256-gcm',
       'aes256-gcm@openssh.com',
     ],
   },
@@ -1232,11 +1230,11 @@ const setup = setupSimple.bind(undefined, debug);
     config: {
       remove: /.*/,
       append: 'aes256-ctr',
-      prepend: [ 'aes256-gcm', 'aes128-gcm' ],
+      prepend: [ 'aes256-gcm@openssh.com', 'aes128-gcm@openssh.com' ],
     },
     expected: [
-      'aes256-gcm',
-      'aes128-gcm',
+      'aes256-gcm@openssh.com',
+      'aes128-gcm@openssh.com',
       'aes256-ctr',
     ],
   },
@@ -1425,4 +1423,26 @@ const setup = setupSimple.bind(undefined, debug);
     socket.end();
   }));
   server.injectSocket(socket);
+}
+
+{
+  const { client, server } = setup(
+    'Server should not error when cleaning up client bare session channels'
+  );
+
+  server.on('connection', mustCall((conn) => {
+    conn.on('session', mustCall((accept, reject) => {
+      accept().on('exec', mustCall((accept, reject, info) => {
+        assert(info.command === 'uptime',
+               `Wrong exec command: ${info.command}`);
+        client.end();
+      }));
+    }));
+  }));
+
+  client.on('ready', mustCall(() => {
+    client.exec('uptime', mustCall((err) => {
+      assert(err instanceof Error);
+    }));
+  }));
 }
